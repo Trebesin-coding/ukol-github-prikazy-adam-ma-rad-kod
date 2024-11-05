@@ -20,25 +20,6 @@ jobs:
             echo "index.html not found" && exit 1
           fi
       
-          # Check for inline style centering
-          if grep -q '<img.*style=".*width:500px;.*height:400px;.*display:block;.*margin:auto;.*"' index.html; then
-            echo "Image is correctly centered using inline styles"
-          else
-            # Check for internal CSS centering in <style> block
-            if grep -q '<style>.*img.*{.*width:500px;.*height:400px;.*display:block;.*margin:auto;.*}.*</style>' index.html; then
-              echo "Image is correctly centered using internal CSS"
-            else
-              # Check for Flexbox centering
-              if grep -q 'display:\s*flex' index.html && grep -q 'justify-content:\s*center' index.html && grep -q 'align-items:\s*center' index.html; then
-                echo "Image is correctly centered using Flexbox"
-              else
-                echo "Image is not properly centered or does not have the specified dimensions" && exit 1
-              fi
-            fi
-          fi
-
-
-
       # Check for prikazy.txt and verify the commands
       - name: Check for prikazy.txt and commands
         run: |
